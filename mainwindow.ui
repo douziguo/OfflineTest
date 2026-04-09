@@ -1,0 +1,727 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>mainwindow</class>
+ <widget class="QMainWindow" name="mainwindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1400</width>
+    <height>850</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1000</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>AOI 离线测试平台 v1.0</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+/* ===== 全局 ===== */
+QMainWindow, QWidget {
+    background-color: #f5f6fa;
+    font-family: &quot;Microsoft YaHei&quot;, &quot;Segoe UI&quot;, Arial;
+    font-size: 13px;
+    color: #2c3e50;
+}
+
+/* ===== 顶部导航栏 ===== */
+QWidget#topBar {
+    background-color: #ffffff;
+    border-bottom: 2px solid #e8ecf1;
+    padding: 0px;
+}
+QWidget#topBar QLabel#titleLabel {
+    font-size: 20px;
+    font-weight: bold;
+    color: #1a73e8;
+    padding-left: 8px;
+}
+
+/* ===== 按钮 ===== */
+QPushButton {
+    background-color: #ffffff;
+    border: 1px solid #d1d9e6;
+    border-radius: 6px;
+    padding: 7px 18px;
+    font-size: 13px;
+    color: #2c3e50;
+    min-height: 18px;
+}
+QPushButton:hover {
+    background-color: #e8f0fe;
+    border-color: #1a73e8;
+    color: #1a73e8;
+}
+QPushButton:pressed {
+    background-color: #d2e3fc;
+}
+QPushButton:disabled {
+    background-color: #f0f0f0;
+    color: #b0b0b0;
+    border-color: #e0e0e0;
+}
+
+/* 主操作按钮（开始） */
+QPushButton#pushButton_3 {
+    background-color: #1a73e8;
+    color: #ffffff;
+    border: none;
+    font-weight: bold;
+    padding: 8px 28px;
+    border-radius: 6px;
+}
+QPushButton#pushButton_3:hover {
+    background-color: #1557b0;
+}
+QPushButton#pushButton_3:pressed {
+    background-color: #0d47a1;
+}
+
+/* 危险操作按钮（结束） */
+QPushButton#pushButton_7 {
+    background-color: #ffffff;
+    color: #d93025;
+    border: 1px solid #d93025;
+    font-weight: bold;
+    padding: 8px 28px;
+    border-radius: 6px;
+}
+QPushButton#pushButton_7:hover {
+    background-color: #fce8e6;
+}
+
+/* ===== 输入框 ===== */
+QLineEdit {
+    background-color: #ffffff;
+    border: 1px solid #d1d9e6;
+    border-radius: 6px;
+    padding: 6px 12px;
+    color: #2c3e50;
+    selection-background-color: #1a73e8;
+    selection-color: #ffffff;
+}
+QLineEdit:focus {
+    border: 2px solid #1a73e8;
+}
+QLineEdit:disabled {
+    background-color: #f0f0f0;
+    color: #999999;
+}
+
+/* ===== 分组框 ===== */
+QGroupBox {
+    font-weight: bold;
+    font-size: 13px;
+    color: #34495e;
+    border: 1px solid #d1d9e6;
+    border-radius: 8px;
+    margin-top: 14px;
+    padding: 14px 12px 12px 12px;
+    background-color: #ffffff;
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    left: 16px;
+    padding: 0 8px;
+    color: #1a73e8;
+}
+
+/* ===== 表格 ===== */
+QTableWidget {
+    background-color: #ffffff;
+    alternate-background-color: #f5f7fa;
+    border: 1px solid #d1d9e6;
+    border-radius: 6px;
+    gridline-color: #e8ecf1;
+    selection-background-color: #d2e3fc;
+    selection-color: #1a1a1a;
+    font-size: 12px;
+}
+QTableWidget::item {
+    padding: 4px 8px;
+}
+QHeaderView::section {
+    background-color: #f0f3f7;
+    padding: 6px 8px;
+    border: none;
+    border-right: 1px solid #d1d9e6;
+    border-bottom: 2px solid #1a73e8;
+    font-weight: bold;
+    font-size: 12px;
+    color: #34495e;
+}
+
+/* ===== 复选框 ===== */
+QCheckBox {
+    spacing: 8px;
+    font-size: 13px;
+    color: #2c3e50;
+}
+QCheckBox::indicator {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 2px solid #b0bec5;
+    background-color: #ffffff;
+}
+QCheckBox::indicator:hover {
+    border-color: #1a73e8;
+}
+QCheckBox::indicator:checked {
+    background-color: #1a73e8;
+    border-color: #1a73e8;
+    image: url();
+}
+
+/* ===== 标签 ===== */
+QLabel#label_imagePreview {
+    background-color: #2c3e50;
+    border: 2px dashed #d1d9e6;
+    border-radius: 8px;
+    color: #95a5a6;
+    font-size: 14px;
+}
+
+/* ===== 状态栏 ===== */
+QStatusBar {
+    background-color: #ffffff;
+    border-top: 1px solid #e8ecf1;
+    color: #5f6368;
+    font-size: 12px;
+}
+
+/* ===== 菜单栏 ===== */
+QMenuBar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e8ecf1;
+    color: #2c3e50;
+    font-size: 13px;
+}
+QMenuBar::item:selected {
+    background-color: #e8f0fe;
+}
+QMenu {
+    background-color: #ffffff;
+    border: 1px solid #d1d9e6;
+    border-radius: 6px;
+}
+QMenu::item:selected {
+    background-color: #e8f0fe;
+}
+   </string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="mainVBoxLayout" stretch="0,0,1">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+
+    <!-- ============ 顶部标题栏 ============ -->
+    <item>
+     <widget class="QWidget" name="topBar" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>56</height>
+       </size>
+      </property>
+      <layout class="QHBoxLayout" name="topBarLayout">
+       <property name="leftMargin">
+        <number>20</number>
+       </property>
+       <property name="topMargin">
+        <number>10</number>
+       </property>
+       <property name="rightMargin">
+        <number>20</number>
+       </property>
+       <property name="bottomMargin">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="titleLabel">
+         <property name="text">
+          <string>AOI 离线测试平台</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="topBarSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton">
+         <property name="text">
+          <string>🔧 AOI模型管理</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_8">
+         <property name="text">
+          <string>📥 导出CSV</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_9">
+         <property name="text">
+          <string>📷 导出漏检图</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_10">
+         <property name="text">
+          <string>📷 导出过杀图</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+
+    <!-- ============ 配置区域 ============ -->
+    <item>
+     <widget class="QWidget" name="configArea" native="true">
+      <property name="styleSheet">
+       <string notr="true">QWidget#configArea {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e8ecf1;
+}</string>
+      </property>
+      <layout class="QHBoxLayout" name="configHBoxLayout">
+       <property name="spacing">
+        <number>16</number>
+       </property>
+       <property name="leftMargin">
+        <number>20</number>
+       </property>
+       <property name="topMargin">
+        <number>12</number>
+       </property>
+       <property name="rightMargin">
+        <number>20</number>
+       </property>
+       <property name="bottomMargin">
+        <number>12</number>
+       </property>
+
+       <!-- 样本导入 -->
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>📁 样本路径：</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit">
+         <property name="placeholderText">
+          <string>请输入或选择样本目录...</string>
+         </property>
+         <property name="minimumWidth">
+          <number>180</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="text">
+          <string>浏览...</string>
+         </property>
+        </widget>
+       </item>
+
+       <!-- 分隔线 -->
+       <item>
+        <widget class="Line" name="configLine1">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: #d1d9e6;</string>
+         </property>
+        </widget>
+       </item>
+
+       <!-- AOI模型 -->
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>🧠 AOI模型：</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_3">
+         <property name="placeholderText">
+          <string>模型路径</string>
+         </property>
+         <property name="minimumWidth">
+          <number>140</number>
+         </property>
+        </widget>
+       </item>
+
+       <!-- 分隔线 -->
+       <item>
+        <widget class="Line" name="configLine2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: #d1d9e6;</string>
+         </property>
+        </widget>
+       </item>
+
+       <!-- 测试选项 -->
+       <item>
+        <widget class="QCheckBox" name="checkBox">
+         <property name="text">
+          <string>过杀测试</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkBox_2">
+         <property name="text">
+          <string>保存CSV</string>
+         </property>
+        </widget>
+       </item>
+
+       <!-- 弹性间距 -->
+       <item>
+        <spacer name="configSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+
+       <!-- 间隔时间 -->
+       <item>
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>⏱ 间隔：</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_5">
+         <property name="maximumSize">
+          <size>
+           <width>60</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="placeholderText">
+          <string>ms</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+
+    <!-- ============ 主内容区域（左右分栏） ============ -->
+    <item>
+     <widget class="QWidget" name="contentArea" native="true">
+      <layout class="QHBoxLayout" name="contentHBoxLayout" stretch="3,2">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+
+       <!-- ====== 左侧：图像预览 ====== -->
+       <item>
+        <widget class="QWidget" name="leftPanel" native="true">
+         <layout class="QVBoxLayout" name="leftPanelLayout">
+          <property name="spacing">
+           <number>8</number>
+          </property>
+          <property name="leftMargin">
+           <number>16</number>
+          </property>
+          <property name="topMargin">
+           <number>12</number>
+          </property>
+          <property name="rightMargin">
+           <number>8</number>
+          </property>
+          <property name="bottomMargin">
+           <number>8</number>
+          </property>
+
+          <item>
+           <widget class="QLabel" name="label_imagePreview">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+
+          <!-- 图片导航控制栏 -->
+          <item>
+           <layout class="QHBoxLayout" name="controlBarLayout">
+            <property name="spacing">
+             <number>10</number>
+            </property>
+            <item>
+             <widget class="QPushButton" name="pushButton_5">
+              <property name="text">
+               <string>⬅ 上一张</string>
+              </property>
+              <property name="minimumWidth">
+               <number>90</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_3">
+              <property name="text">
+               <string>▶ 开始</string>
+              </property>
+              <property name="minimumWidth">
+               <number>90</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_4">
+              <property name="text">
+               <string>⏸ 暂停</string>
+              </property>
+              <property name="minimumWidth">
+               <number>90</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_6">
+              <property name="text">
+               <string>➡ 下一张</string>
+              </property>
+              <property name="minimumWidth">
+               <number>90</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="controlBarSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_7">
+              <property name="text">
+               <string>⏹ 结束</string>
+              </property>
+              <property name="minimumWidth">
+               <number>90</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+
+         </layout>
+        </widget>
+       </item>
+
+       <!-- ====== 右侧：结果面板 ====== -->
+       <item>
+        <widget class="QWidget" name="rightPanel" native="true">
+         <property name="styleSheet">
+          <string notr="true">QWidget#rightPanel {
+    background-color: #ffffff;
+    border-left: 1px solid #e8ecf1;
+}</string>
+         </property>
+         <layout class="QVBoxLayout" name="rightPanelLayout">
+          <property name="spacing">
+           <number>8</number>
+          </property>
+          <property name="leftMargin">
+           <number>8</number>
+          </property>
+          <property name="topMargin">
+           <number>12</number>
+          </property>
+          <property name="rightMargin">
+           <number>16</number>
+          </property>
+          <property name="bottomMargin">
+           <number>8</number>
+          </property>
+
+          <!-- 漏检结果表格 -->
+          <item>
+           <widget class="QGroupBox" name="groupBox_miss">
+            <property name="title">
+             <string>漏检结果</string>
+            </property>
+            <layout class="QVBoxLayout" name="missGroupLayout">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>6</number>
+             </property>
+             <property name="topMargin">
+              <number>18</number>
+             </property>
+             <property name="rightMargin">
+              <number>6</number>
+             </property>
+             <property name="bottomMargin">
+              <number>6</number>
+             </property>
+             <item>
+              <widget class="QTableWidget" name="tableWidget">
+               <property name="alternatingRowColors">
+                <bool>true</bool>
+               </property>
+               <property name="selectionBehavior">
+                <enum>QAbstractItemView::SelectRows</enum>
+               </property>
+               <property name="selectionMode">
+                <enum>QAbstractItemView::SingleSelection</enum>
+               </property>
+               <property name="showGrid">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+
+          <!-- 过杀结果表格 -->
+          <item>
+           <widget class="QGroupBox" name="groupBox_overkill">
+            <property name="title">
+             <string>过杀结果</string>
+            </property>
+            <layout class="QVBoxLayout" name="overkillGroupLayout">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>6</number>
+             </property>
+             <property name="topMargin">
+              <number>18</number>
+             </property>
+             <property name="rightMargin">
+              <number>6</number>
+             </property>
+             <property name="bottomMargin">
+              <number>6</number>
+             </property>
+             <item>
+              <widget class="QTableWidget" name="tableWidget_2">
+               <property name="alternatingRowColors">
+                <bool>true</bool>
+               </property>
+               <property name="selectionBehavior">
+                <enum>QAbstractItemView::SelectRows</enum>
+               </property>
+               <property name="selectionMode">
+                <enum>QAbstractItemView::SingleSelection</enum>
+               </property>
+               <property name="showGrid">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+
+         </layout>
+        </widget>
+       </item>
+
+      </layout>
+     </widget>
+    </item>
+
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1400</width>
+     <height>23</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
